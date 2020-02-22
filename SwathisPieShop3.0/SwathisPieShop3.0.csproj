@@ -5,8 +5,4 @@
     <RootNamespace>SwathisPieShop3._0</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\Images\" />
-  </ItemGroup>
-
 </Project>
