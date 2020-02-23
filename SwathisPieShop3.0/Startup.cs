@@ -29,10 +29,13 @@ namespace SwathisPieShop3._0
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddHttpContextAccessor();
+            services.AddSession();
             services.AddDbContext<AppDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IPieRepository, PieRepository>();
             services.AddScoped<ICategoryInterface, CategoryRepository>();
+            services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
             services.AddControllersWithViews();
 
         }
@@ -45,6 +48,7 @@ namespace SwathisPieShop3._0
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
