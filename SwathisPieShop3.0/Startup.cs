@@ -8,17 +8,31 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SwathisPieShop3._0.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace SwathisPieShop3._0
 {
     public class Startup
     {
+
+        public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IPieRepository, MockPieRepository>();
-            services.AddScoped<ICategoryInterface, MockCategoryRepository>();
+
+            services.AddDbContext<AppDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IPieRepository, PieRepository>();
+            services.AddScoped<ICategoryInterface, CategoryRepository>();
             services.AddControllersWithViews();
 
         }
