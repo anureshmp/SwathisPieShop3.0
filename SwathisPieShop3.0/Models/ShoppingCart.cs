@@ -94,6 +94,17 @@ namespace SwathisPieShop3._0.Models
 
         }
 
+        public void ClearCart()
+        {
+            var cartItems = _appDbContext
+                .ShoppingCartItems
+                .Where(cart => cart.ShoppingCartId == ShoppingCartId);
+
+            _appDbContext.ShoppingCartItems.RemoveRange(cartItems);
+
+            _appDbContext.SaveChanges();
+        }
+
         public decimal GetShoppingCartTotal()
         {
             var total = _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)

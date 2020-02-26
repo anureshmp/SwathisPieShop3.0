@@ -33,6 +33,7 @@ namespace SwathisPieShop3._0
             services.AddSession();
             services.AddDbContext<AppDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IPieRepository, PieRepository>();
             services.AddScoped<ICategoryInterface, CategoryRepository>();
             services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
