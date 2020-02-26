@@ -1,6 +1,9 @@
 ﻿@model Order
 
     <form asp-action="Checkout" method="post" class="form-horizontal" role="form">
+        <h4>You are just one step away from delicious pies!</h4>
+
+        <div asp-validation-summary="All" class="text-danger"></div>
 
         <div class="form-group">
             <label asp-for="LastName" class="col-md-2 control-label"></label>
